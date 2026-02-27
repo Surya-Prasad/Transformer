@@ -145,8 +145,10 @@ class MultiHeadSelfAttention(nn.Module):
         v = v.transpose(-2, -3)
         
         if rope is not None and token_positions is not None:
-            q = rope(q, token_positions)
-            k = rope(k, token_positions)
+            rope_positions = token_positions.unsqueeze(-2)
+            
+            q = rope(q, rope_positions)
+            k = rope(k, rope_positions)
 
         row_indices = torch.arange(seq_len, device=x.device).unsqueeze(1)
         col_indices = torch.arange(seq_len, device=x.device).unsqueeze(0)
