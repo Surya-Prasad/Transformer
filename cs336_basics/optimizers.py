@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import math
 
-def gradient_clipping(parameters, max_norm: float) -> torch.Tensor:
+def gradient_clipping(parameters, max_norm):
     if isinstance(parameters, torch.Tensor):
         parameters = [parameters]
         

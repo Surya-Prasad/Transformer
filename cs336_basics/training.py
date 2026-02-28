@@ -3,7 +3,6 @@ import numpy as np
 import time
 import os
 
-# Import all your custom components
 from cs336_basics.modules import TransformerLM
 from cs336_basics.optimizers import AdamW, gradient_clipping, LR_cosine_schedule
 from tests.adapters import run_get_batch, run_cross_entropy, run_save_checkpoint
@@ -33,7 +32,6 @@ def train():
     print(f"Using device: {device}")
 
     dataset = np.load("data/tinystories_tokenized.npy") 
-    # dataset = np.random.randint(0, vocab_size, size=(100000,)) # Dummy data for testing the loop
     
     model = TransformerLM(
         vocab_size=vocab_size,

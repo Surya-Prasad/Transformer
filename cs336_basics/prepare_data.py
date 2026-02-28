@@ -10,10 +10,8 @@ def prepare_custom_dataset():
     print(f"Training BPE tokenizer on {input_path}...")
     print("(This might take some time depending on your BPE implementation!)")
     
-    # 1. Train the BPE model
     vocab, merges = train_bpe(input_path, vocab_size, special_tokens)
     
-    # 2. Save the vocab and merges so generate.py can load the exact same tokenizer later
     print("Saving tokenizer vocab and merges to data/custom_bpe.pkl...")
     with open("data/custom_bpe.pkl", "wb") as f:
         pickle.dump({
@@ -22,7 +20,6 @@ def prepare_custom_dataset():
             "special_tokens": special_tokens
         }, f)
         
-    # 3. Instantiate the tokenizer and encode the text
     print("Tokenizing the dataset...")
     tokenizer = Tokenizer(vocab, merges, special_tokens=special_tokens)
     
@@ -32,7 +29,6 @@ def prepare_custom_dataset():
     tokens = tokenizer.encode(text)
     print(f"Total tokens: {len(tokens):,}")
     
-    # 4. Save to .npy
     token_array = np.array(tokens, dtype=np.uint16)
     np.save("data/tinystories_tokenized.npy", token_array)
     print("Saved custom tokenized dataset to data/tinystories_tokenized.npy")
