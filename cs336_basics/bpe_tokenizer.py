@@ -16,6 +16,7 @@ def merge(chunks, pair, new_chunk):
         else:
             new_chunks.append(chunks[i])
             i += 1
+        # print(f"{pair} | {new_chunk}")
     return new_chunks
 
 class Tokenizer:
@@ -127,7 +128,7 @@ class Tokenizer:
         encoded_stream = b"".join(bytes_list)
         return encoded_stream.decode("utf-8", errors="replace")
 
-def train_bpe(input_path: str, vocab_size: int, special_tokens: list[str]) -> tuple[dict[int, bytes], list[tuple[bytes, bytes]]]:
+def train_bpe(input_path, vocab_size, special_tokens):
     base_vocab = {i: bytes([i]) for i in range(256)}
     
     tokenizer = Tokenizer(vocab=base_vocab, merges={}, special_tokens=special_tokens)
